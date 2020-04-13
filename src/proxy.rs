@@ -54,12 +54,11 @@ async fn handle_request(
         )));
     }
 
-    let raw_token_value = format!("Bearer {}", String::from_utf8(output.stdout)?);
-    let token_value: &str = raw_token_value.trim();
+    let token_value = format!("Bearer {}", String::from_utf8(output.stdout)?.trim());
     log::debug!("Will use token: `{}`", token_value);
     request_parts
         .headers
-        .insert("Authorization", HeaderValue::from_str(token_value)?);
+        .insert("Authorization", HeaderValue::from_str(&token_value)?);
 
     let outgoing_request = Request::from_parts(request_parts, body);
 
