@@ -73,7 +73,9 @@ async fn handle_request(
     Ok(result)
 }
 
-fn get_https_client(params: &ProxyParams) -> Result<Client<HttpsConnector<HttpConnector>, Body>, Error> {
+fn get_https_client(
+    params: &ProxyParams,
+) -> Result<Client<HttpsConnector<HttpConnector>, Body>, Error> {
     let tls_connector = tokio_tls::TlsConnector::from(
         TlsConnector::builder()
             .danger_accept_invalid_certs(params.insecure_https)
