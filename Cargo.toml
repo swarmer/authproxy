@@ -1,0 +1,19 @@
+[package]
+name = "authproxy"
+description = "A Proxy that injects the Authorization header"
+publish = false
+license = "MIT"
+version = "0.1.0"
+authors = ["Anton Barkovsky <anton@swarmer.me>"]
+edition = "2018"
+
+[dependencies]
+clap = "^2.33.0"
+failure = "^0.1.7"
+tokio = { version = "^0.2.13", features = [] }
+log = "^0.4.8"
+env_logger = "^0.7.1"
+hyper = "^0.13.4"
+futures = "^0.3.4"
+tower-timeout = "^0.3.0"
+http = "^0.2.1"
