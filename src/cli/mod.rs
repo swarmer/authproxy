@@ -20,6 +20,7 @@ fn get_proxy_params(matches: ArgMatches) -> Result<proxy::ProxyParams, Error> {
             .value_of("TARGET_URL")
             .ok_or_else(|| cmdline_parse_error("TARGET_URL"))?
             .to_string(),
+        insecure_https: matches.is_present("INSECURE_HTTPS"),
         local_host: matches
             .value_of("LISTEN_HOST")
             .ok_or_else(|| cmdline_parse_error("LISTEN_HOST"))?

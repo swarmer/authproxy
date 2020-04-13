@@ -21,6 +21,12 @@ pub fn build_clap_app() -> App<'static, 'static> {
                 .help("Which host to listen on"),
         )
         .arg(
+            Arg::with_name("INSECURE_HTTPS")
+                .long("insecure-https")
+                .takes_value(false)
+                .help("Whether to ignore errors in HTTPS certificate validation"),
+        )
+        .arg(
             Arg::with_name("LISTEN_PORT")
                 .short("p")
                 .long("listen-port")

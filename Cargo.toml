@@ -9,11 +9,14 @@ edition = "2018"
 
 [dependencies]
 clap = "^2.33.0"
-failure = "^0.1.7"
-tokio = { version = "^0.2.13", features = [] }
-log = "^0.4.8"
 env_logger = "^0.7.1"
-hyper = "^0.13.4"
+failure = "^0.1.7"
 futures = "^0.3.4"
-tower-timeout = "^0.3.0"
 http = "^0.2.1"
+hyper = "^0.13.4"
+hyper-tls = "^0.4.1"
+log = "^0.4.8"
+native-tls = "^0.2.4"
+tokio = { version = "^0.2.13", features = ["process", "time"] }
+tokio-tls = "^0.3.0"
+tower-timeout = "^0.3.0"
