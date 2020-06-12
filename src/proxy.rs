@@ -22,6 +22,7 @@ pub struct ProxyParams {
     pub insecure_https: bool,
     pub local_host: String,
     pub local_port: u16,
+    pub cache_ttl_secs: u64,
     pub command: Vec<String>,
 }
 
@@ -47,9 +48,9 @@ struct TokenCache {
 }
 
 impl TokenCache {
-    fn new() -> Self {
+    fn new(ttl: Duration) -> Self {
         TokenCache {
-            ttl: Duration::from_secs(60), // TODO: take from params
+            ttl,
             entry: Mutex::new(None),
         }
     }
@@ -85,8 +86,8 @@ pub struct ProxyContext {
 impl ProxyContext {
     pub fn new(params: ProxyParams) -> Self {
         ProxyContext {
+            cache: TokenCache::new(Duration::from_secs(params.cache_ttl_secs)),
             params,
-            cache: TokenCache::new(),
         }
     }
 }

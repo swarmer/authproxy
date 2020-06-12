@@ -29,6 +29,10 @@ fn get_proxy_params(matches: ArgMatches) -> Result<proxy::ProxyParams, Error> {
             .value_of("LISTEN_PORT")
             .and_then(|s| s.parse::<u16>().ok())
             .ok_or_else(|| cmdline_parse_error("LISTEN_PORT"))?,
+        cache_ttl_secs: matches
+            .value_of("CACHE_TTL")
+            .and_then(|s| s.parse::<u64>().ok())
+            .ok_or_else(|| cmdline_parse_error("CACHE_TTL"))?,
         command: matches
             .values_of("COMMAND")
             .ok_or_else(|| cmdline_parse_error("COMMAND"))?

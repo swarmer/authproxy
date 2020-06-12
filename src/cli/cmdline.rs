@@ -41,6 +41,19 @@ pub fn build_clap_app() -> App<'static, 'static> {
                 .help("Which port to listen on"),
         )
         .arg(
+            Arg::with_name("CACHE_TTL")
+                .long("cache-ttl")
+                .takes_value(true)
+                .value_name("CACHE_TTL")
+                .default_value("300")
+                .validator(|s| {
+                    s.parse::<u64>()
+                        .and(Ok(()))
+                        .or_else(|_| Err(String::from("Invalid cache ttl")))
+                })
+                .help("For how many seconds to keep last token in cache"),
+        )
+        .arg(
             Arg::with_name("COMMAND")
                 .multiple(true)
                 .required(true)
