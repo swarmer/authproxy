@@ -10,7 +10,6 @@ use hyper::server::conn::AddrStream;
 use hyper::service::{make_service_fn, service_fn};
 use hyper::{Body, Client, Request, Response, Server};
 use hyper_tls::HttpsConnector;
-use log;
 use native_tls::TlsConnector;
 use tokio::process::Command;
 use tokio::time::timeout;
@@ -59,6 +58,9 @@ async fn handle_request(
     request_parts
         .headers
         .insert("Authorization", HeaderValue::from_str(&token_value)?);
+
+    // The incoming host header will very likely be considered incorrect by the target server
+    request_parts.headers.remove("Host");
 
     let outgoing_request = Request::from_parts(request_parts, body);
 
