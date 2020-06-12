@@ -42,7 +42,7 @@ pub async fn cli_future() -> i32 {
     let matches = app.get_matches();
 
     let result = match get_proxy_params(matches) {
-        Ok(params) => proxy::run_proxy(params).await,
+        Ok(params) => proxy::run_proxy(proxy::ProxyContext::new(params)).await,
         Err(e) => Err(e),
     };
 
